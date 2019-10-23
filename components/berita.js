@@ -1,16 +1,19 @@
 import React from 'react'
 
 
-export default ({ title, thumbnail, description, content, source, onClick }) => {
+export default ({ title, thumbnail, created_date, description, content, source, onClick }) => {
+  const altTag = title.split(' ').join('-').toLowerCase()
   return (
-    <a style={{ textDecoration: 'none' }} onClick={onClick}>
+    <a style={{ textDecoration: 'none', width: '100%' }} onClick={onClick}>
       <div 
         className="container"  
       >
 
-        <h2>{title}</h2>
+        <h1>{title}</h1>
 
-        <img src={thumbnail} />
+        <img src={thumbnail} alt={altTag} />
+
+        {created_date && <span>{created_date}</span>}
 
         {description && <p>{description}</p>}
 
@@ -30,11 +33,10 @@ export default ({ title, thumbnail, description, content, source, onClick }) => 
             flex-direction: column;
             align-items: stretch;
           }
-          h2 {
-            
+          h1 {
             text-transform: uppercase;        
             font-size: 14pt; 
-            margin: 0px;            
+            margin: 0px;
           }
           p, .paragraph {          
             text-decoration: none;
@@ -44,19 +46,27 @@ export default ({ title, thumbnail, description, content, source, onClick }) => 
             object-fit: cover;
             width: 100%;
           }
+          span {
+            opacity: 0.5;
+            font-size: 9pt;            
+            padding-top: 10px;
+          }
           @media only screen and (max-width: 600px) {
             img {
               height: 50vw;
             }
-            h2, p, .paragraph {
+            h1, p, .paragraph {
               padding: 10px;
+            }
+            span {
+              padding-left: 10px;
             }
           }
           @media only screen and (min-width: 601px) {
             img {
               height: 25vw;
             }
-            h2, p, .paragraph {
+            h1, p, .paragraph {
               padding-top: 10px;
               padding-bottom: 10px;
             }

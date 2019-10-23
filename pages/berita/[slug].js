@@ -16,6 +16,7 @@ const DetailBerita = ({ berita }) => {
           content={berita.content}
           slug={berita.slug}
           source={berita.url}
+          created_date={berita.created_date}
         />
       )
     }
@@ -23,7 +24,10 @@ const DetailBerita = ({ berita }) => {
   }
 
   return (
-    <Page title={berita ? berita.title : 'Berita - NOHOAX.ID'}>
+    <Page 
+      title={berita ? berita.title : 'Berita hari ini - NOHOAX.ID'}
+      description={berita ? berita.description : 'Berita hari ini.'}
+    >
       {renderContent()}
     </Page>
   )

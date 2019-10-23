@@ -11,7 +11,10 @@ const FETCH_LIMIT = 100
 const Home = ({ beritas }) => {
   const router = useRouter()
   return (
-    <Page title="Berita Indonesia - NOHOAX.ID">
+    <Page 
+      title="Berita Indonesia - NOHOAX.ID"
+      description="Berita hari ini. Berita terkini dari berbagai media indonesia."
+    >
       <FlatList 
         datas={beritas}
         renderItem={(item) => (
@@ -19,6 +22,7 @@ const Home = ({ beritas }) => {
             title={item.title}
             thumbnail={item.thumbnail}
             description={item.description}
+            created_date={item.created_date}
             onClick={() => router.push(`/berita/${item.slug}`)}
           />
         )}

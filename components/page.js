@@ -2,11 +2,13 @@ import React from 'react'
 import Head from 'next/head'
 import Nav from './nav'
 
-export default ({ children, title }) => (
+export default ({ children, title, description }) => (
   <div>
     <Head>
       <title>{title}</title>
       <link rel='icon' href='/favicon.ico' />
+      <meta name="description" content={description} />
+      <meta name="robots" content="index, follow" />
     </Head>    
 
     <Nav />
@@ -18,7 +20,7 @@ export default ({ children, title }) => (
 
     <style jsx>{`
       .content-wrapper {
-        margin-top: 50px;
+        margin-top: 60px;
       }
     `}</style>
 
@@ -31,7 +33,7 @@ export default ({ children, title }) => (
         -moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
         box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
       }
-      h2, p, span {
+      h1, p, span {
         font-family: Arial;
         margin: 0px;
       }      
