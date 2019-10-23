@@ -2,26 +2,43 @@ import React from 'react'
 import Berita from '../components/berita'
 import Page from '../components/page'
 import FlatList from '../components/flatlist'
-import datas from './datas.json'
+import fetch from 'isomorphic-unfetch'
+import services from '../services'
+import { useRouter } from 'next/router'
 
-const Home = () => (
-  <Page title="Home">
+const FETCH_LIMIT = 100
 
-    <FlatList 
-      style={styles.contentWrapper} 
-      datas={datas}
-      renderItem={(item, index) => <Berita />}
-    />    
+const Home = ({ beritas }) => {
+  const router = useRouter()
+  return (
+    <Page title="Berita Indonesia - NOHOAX.ID">
+      <FlatList 
+        datas={beritas}
+        renderItem={(item) => (
+          <Berita 
+            title={item.title}
+            thumbnail={item.thumbnail}
+            description={item.description}
+            onClick={() => router.push(`/berita/${item.slug}`)}
+          />
+        )}
+        onEndReached={() => {}}
+      />
+    </Page>
+  )
+}
 
-    <style jsx>{`
-      
-    `}</style>
-  </Page>
-)
-
-const styles = {
-  contentWrapper: {
-    marginTop: 50
+Home.getInitialProps = async function() {
+  try {
+    const res = await fetch(services.URL_GET_BERITA(FETCH_LIMIT))
+    const beritas = await res.json()
+    return {
+      beritas
+    }
+  }catch {
+    return {
+      beritas: []
+    }
   }
 }
 

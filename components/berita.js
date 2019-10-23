@@ -1,34 +1,68 @@
 import React from 'react'
 
-export default () => {
+
+export default ({ title, thumbnail, description, content, source, onClick }) => {
   return (
-    <div className="container">
+    <a style={{ textDecoration: 'none' }} onClick={onClick}>
+      <div 
+        className="container"  
+      >
 
-      <h2>Judul beritas</h2>
+        <h2>{title}</h2>
 
-      <img src="/default.png" />
+        <img src={thumbnail} />
 
-      <p>Lorem ipsum dolor sit amet lorem ipsum dolor sit amet...</p>
+        {description && <p>{description}</p>}
 
-    <style jsx>{`
-      .container {
-        display: flex;
-        align-self: stretch;
-        background-color: white;
-        z-index: -1;
-        flex-direction: column;
-        align-items: stretch;
-      }
-      h2 {
-        text-transform: uppercase;        
-        font-size: 14pt;
-        padding: 10px;
-        margin: 0px;
-      }
-      p {
-        padding: 10px;
-      }
-    `}</style>
-    </div>
+        {content && <div className="paragraph" dangerouslySetInnerHTML={{ __html: content }}></div>}
+
+        {source && <p>Sumber : {source}</p>}
+
+        <style jsx>{`
+          * {
+            color: black!important;
+          }
+          .container {
+            display: flex;
+            width: 100%;
+            background-color: white;
+            z-index: -1;
+            flex-direction: column;
+            align-items: stretch;
+          }
+          h2 {
+            
+            text-transform: uppercase;        
+            font-size: 14pt; 
+            margin: 0px;            
+          }
+          p, .paragraph {          
+            text-decoration: none;
+            font-size: 11pt;
+          }
+          img {
+            object-fit: cover;
+            width: 100%;
+          }
+          @media only screen and (max-width: 600px) {
+            img {
+              height: 50vw;
+            }
+            h2, p, .paragraph {
+              padding: 10px;
+            }
+          }
+          @media only screen and (min-width: 601px) {
+            img {
+              height: 25vw;
+            }
+            h2, p, .paragraph {
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+          }
+        `}</style>
+      </div>
+    </a>
   )
 }
