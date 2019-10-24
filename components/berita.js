@@ -1,4 +1,6 @@
 import React from 'react'
+import services from '../services'
+import ShareButtons from '../components/sharebuttons'
 
 
 export default ({ title, thumbnail, created_date, description, content, source, slug }) => {
@@ -17,6 +19,8 @@ export default ({ title, thumbnail, created_date, description, content, source, 
         {created_date && <span>{created_date}</span>}
 
         {description && <p>{description.substring(0, 200) + '...'}</p>}
+        
+        {content && <ShareButtons url={`${services.BASE_FRONT_END_URL}/berita/${slug}`} />}
 
         {content && <div className="paragraph" dangerouslySetInnerHTML={{ __html: content }}></div>}
 

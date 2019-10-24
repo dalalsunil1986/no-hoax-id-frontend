@@ -20,7 +20,7 @@ const FilmPage = ({ dataMovie }) => {
     >
       <div className="content-wrapper">
         {docs.map(movie => (
-          <a href={`/film/${movie.slug}`} className="content-item">
+          <a key={movie.slug} href={`/film/${movie.slug}`} className="content-item">
             <img src={movie.thumbnail} alt={movie.title.split(' ').join('-').toLowerCase()}/>
             <div className="detail-wrapper">
               <h2>{movie.title}</h2>

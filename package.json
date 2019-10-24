@@ -15,6 +15,7 @@
     "react": "16.10.2",
     "react-dom": "16.10.2",
     "react-icons": "^3.7.0",
-    "react-js-pagination": "^3.0.2"
+    "react-js-pagination": "^3.0.2",
+    "react-social-sharing": "^3.0.1"
   }
 }

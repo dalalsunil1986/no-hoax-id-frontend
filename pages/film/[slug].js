@@ -1,5 +1,6 @@
 import React from 'react'
 import Page from '../../components/page'
+import ShareButtons from '../../components/sharebuttons'
 import NotFound from '../../components/notfound'
 import services from '../../services'
 import fetch from 'isomorphic-unfetch'
@@ -14,15 +15,16 @@ const DetailBerita = ({ movie }) => {
     >
       {movie ?
         <>          
-          <div className="movie-container" dangerouslySetInnerHTML={{ __html: movie.content }}></div>
-          
-          <h1>{movie.title}</h1>
+          <div className="movie-container" dangerouslySetInnerHTML={{ __html: movie.content }}></div>          
+          <h1>Nonton {movie.title} sub indo</h1>
           <div className="detail-wrapper">            
             <img src={movie.thumbnail} alt={altTag}/>
             <div>
-              <p className="alert"><b>JIKA VIDEO TIDAK BISA DIPUTAR. COBA LAGI MENGAKSES MENGGUNAKAN VPN.</b></p>
-              <p><b>Categories : {movie.categories}</b></p>
-              <p style={{ marginTop: 10 }}>{movie.description}</p>
+              <p className="date">{movie.release_date} | Published : <time>{movie.date}</time></p>              
+              <p className="alert"><b>Categories : {movie.categories}</b></p>
+              <p style={{ marginTop: 10, marginBottom: 10 }}>{movie.description}</p>
+              <p className="alert"><b>Casts : {movie.casts}</b></p>
+              <ShareButtons url={`${services.BASE_FRONT_END_URL}/film/${movie.slug}`} />
             </div>
           </div>
         </>
@@ -44,6 +46,10 @@ const DetailBerita = ({ movie }) => {
         img {
           margin-right: 10px;
           height: 200px;
+        }
+        .date {
+          font-size: 9pt;
+          margin-bottom: 10px;
         }
       `}</style>
     </Page>

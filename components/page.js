@@ -106,7 +106,6 @@ export default ({ children, title, description }) => {
           background-color: #00000034;
           font-size: 10pt;
           padding: 10px;
-          border-radius: 5px;
           margin-bottom: 10px;
         }        
       `}</style>
