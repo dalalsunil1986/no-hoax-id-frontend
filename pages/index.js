@@ -1,47 +1,71 @@
 import React from 'react'
+import Pagination from 'react-js-pagination'
 import Berita from '../components/berita'
 import Page from '../components/page'
 import FlatList from '../components/flatlist'
 import fetch from 'isomorphic-unfetch'
 import services from '../services'
-import { useRouter } from 'next/router'
+import { navigate } from '../libs/utils'
 
-const FETCH_LIMIT = 100
+const LIMIT = 10
 
-const Home = ({ beritas }) => {
-  const router = useRouter()
+const Home = ({ dataBerita }) => {
+  if (!dataBerita) { return null }
+
+  const { totalDocs, docs, page } = dataBerita
   return (
     <Page 
-      title="Berita Indonesia - NOHOAX.ID"
+      title="Berita indonesia terkini - NOHOAX.ID"
       description="Berita hari ini. Berita terkini dari berbagai media indonesia."
-    >
+    >      
       <FlatList 
-        datas={beritas}
+        datas={docs}
         renderItem={(item) => (
           <Berita 
+            key={item.slug}
             title={item.title}
             thumbnail={item.thumbnail}
             description={item.description}
             created_date={item.created_date}
-            onClick={() => router.push(`/berita/${item.slug}`)}
+            slug={item.slug}
           />
         )}
         onEndReached={() => {}}
       />
+
+      <div className="navigation-container">
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={LIMIT}
+          totalItemsCount={totalDocs}
+          pageRangeDisplayed={5}
+          onChange={(pageNumber) => {
+            let url = `/?page=${pageNumber}&limit=${LIMIT}`
+            url += router.query.query ? `&query=${router.query.query}` : ''
+            navigate(url)
+          }}
+        />
+      </div>
     </Page>
   )
 }
 
-Home.getInitialProps = async function() {
+Home.getInitialProps = async function({ query }) {
   try {
-    const res = await fetch(services.URL_GET_BERITA(FETCH_LIMIT))
-    const beritas = await res.json()
+    const searchQuery = query.query || ''
+    const page = query.page || 1
+    const res = await fetch(services.URL_GET_BERITA(searchQuery, page, LIMIT))
+    const dataBerita = await res.json()
+
     return {
-      beritas
+      dataBerita
     }
-  }catch {
+  }catch(err) {
     return {
-      beritas: []
+      dataBerita: {
+        err,
+        url: services.URL_GET_BERITA('', 1, LIMIT)
+      }
     }
   }
 }
