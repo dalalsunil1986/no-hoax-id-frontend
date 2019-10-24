@@ -6,12 +6,14 @@ import FlatList from '../components/flatlist'
 import fetch from 'isomorphic-unfetch'
 import services from '../services'
 import { navigate } from '../libs/utils'
+import { useRouter } from 'next/router'
 
 const LIMIT = 10
 
 const Home = ({ dataBerita }) => {
   if (!dataBerita) { return null }
 
+  const router = useRouter()
   const { totalDocs, docs, page } = dataBerita
   return (
     <Page 
