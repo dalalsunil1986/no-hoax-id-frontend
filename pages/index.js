@@ -17,7 +17,7 @@ const Home = ({ dataBerita }) => {
   const { totalDocs, docs, page } = dataBerita
   return (
     <Page 
-      title="Berita indonesia terkini - NOHOAX.ID"
+      title="Berita indonesia terkini - NO-HOAX.COM"
       description="Berita hari ini. Berita terkini dari berbagai media indonesia."
     >      
       <FlatList 

@@ -15,7 +15,7 @@ const FilmPage = ({ dataMovie }) => {
   const { totalDocs, docs, page } = dataMovie
   return (
     <Page 
-      title={'Nonton film sub indo gratis - NOHOAX.ID'}
+      title={'Nonton film sub indo gratis - NO-HOAX.COM'}
       description={'Streaming nonton film sub indo gratis film terbaru.'}
     >
       <div className="content-wrapper">

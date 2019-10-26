@@ -25,8 +25,9 @@ const DetailBerita = ({ berita }) => {
 
   return (
     <Page 
-      title={berita ? berita.title : 'Berita hari ini - NOHOAX.ID'}
-      description={berita ? berita.description : 'Berita hari ini.'}
+      title={berita ? berita.title : 'Berita hari ini - NO-HOAX.COM'}
+      description={berita ? berita.description : 'Berita not found.'}
+      nofollow={!berita}
     >
       {renderContent()}
     </Page>

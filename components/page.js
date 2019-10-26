@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import services from '../services'
 import { isObjectEmpty } from '../libs/utils'
 
-export default ({ children, title, description }) => {
+export default ({ children, title, description, nofollow }) => {
   const router = useRouter()
   
   return (
@@ -15,7 +15,7 @@ export default ({ children, title, description }) => {
         <link rel='icon' href='/favicon.ico' />
         <link rel='canonical' href={services.BASE_FRONT_END_URL + router.pathname} />
         <meta name="description" content={description} />
-        {!isObjectEmpty(router.query) ?
+        {!isObjectEmpty(router.query) || nofollow ?
           <meta name="robots" content="noindex, nofollow" />
         :
           <meta name="robots" content="index, follow" />        

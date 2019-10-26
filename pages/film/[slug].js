@@ -10,8 +10,9 @@ const DetailBerita = ({ movie }) => {
   const altTag = movie.title.split(' ').join('-').toLowerCase()
   return (
     <Page 
-      title={movie ? movie.title : 'Berita hari ini - NOHOAX.ID'}
-      description={movie ? movie.description : 'Berita hari ini.'}
+      title={movie ? movie.title : 'Berita hari ini - NO-HOAX.COM'}
+      description={movie ? movie.description : 'Not found'}
+      nofollow={!movie}
     >
       {movie ?
         <>          
